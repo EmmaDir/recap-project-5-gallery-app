@@ -12,7 +12,6 @@ const RandomArt = styled.div`
   align-items: center;
   width: 500px;
   margin-left: 2.45rem;
-  margin-top: 2rem;
   background-color: white;
 `;
 

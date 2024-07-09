@@ -1,5 +1,6 @@
 import ArtPieces from "@/components/ArtPieces";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Container = styled.section`
   display: flex;

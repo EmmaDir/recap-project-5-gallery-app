@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 
 const ListItem = styled.li`
@@ -8,11 +9,16 @@ const ListItem = styled.li`
   margin-bottom: 1rem;
   padding-top: 1rem;
   padding-left: 1rem;
+  width: 500px;
+  background-color: white;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
-  background-color: white;
 `;
 
 const Artist = styled.h3`
@@ -25,12 +31,20 @@ export default function ArtPiecePreview({
   artist,
   height,
   width,
+  slug,
 }) {
   return (
     <ListItem>
-      <Image src={image} alt={title} height={height / 10} width={width / 10} />
-      <h2>{title}</h2>
-      <Artist>{artist}</Artist>
+      <StyledLink href={`/art-pieces/${slug}`}>
+        <Image
+          src={image}
+          alt={title}
+          height={height / 10}
+          width={width / 10}
+        />
+        <h2>{title}</h2>
+        <Artist>{artist}</Artist>
+      </StyledLink>
     </ListItem>
   );
 }
