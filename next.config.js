@@ -5,7 +5,6 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: ["example-apis.vercel.app"],
     remotePatterns: [
       {
         protocol: "https",

@@ -27,7 +27,7 @@ export default function ArtPiecePreview({
 }) {
   return (
     <ListItem>
-      <Image src={image} alt="hello" height={height / 10} width={width / 10} />
+      <Image src={image} alt={title} height={height / 10} width={width / 10} />
       <h2>{title}</h2>
       <Artist>{artist}</Artist>
     </ListItem>
