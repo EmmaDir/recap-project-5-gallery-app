@@ -21,11 +21,7 @@ export default function HomePage() {
     return <p>Keine Daten vorhanden</p>;
   }
 
-  function randomIndex() {
-    return Math.floor(Math.random() * pieces.length);
-  }
-
-  const randomPiece = pieces[randomIndex()];
+  const randomPiece = pieces[Math.floor(Math.random() * pieces.length)];
 
   return (
     <>
