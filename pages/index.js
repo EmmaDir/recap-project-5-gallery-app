@@ -1,30 +1,16 @@
-import ArtPieces from "@/components/ArtPieces";
 import Spotlight from "@/components/Spotlight";
-import useSWR from "swr";
 import { uid } from "uid";
+import styled from "styled-components";
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const Conatiner = styled.section`
+  height: 100vw;
+`;
 
-export default function HomePage() {
-  const url = "https://example-apis.vercel.app/api/art";
-  const { data: pieces, error, isLoading } = useSWR(url, fetcher);
-
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (error) {
-    return <h1>Something went wrong!</h1>;
-  }
-
-  if (!pieces) {
-    return <p>Keine Daten vorhanden</p>;
-  }
-
+export default function SpotlightPage({ pieces }) {
   const randomPiece = pieces[Math.floor(Math.random() * pieces.length)];
 
   return (
-    <>
+    <Conatiner>
       <Spotlight
         key={uid()}
         image={randomPiece.imageSource}
@@ -32,7 +18,6 @@ export default function HomePage() {
         height={randomPiece.dimensions.height}
         width={randomPiece.dimensions.width}
       />
-      <ArtPieces pieces={pieces}></ArtPieces>
-    </>
+    </Conatiner>
   );
 }

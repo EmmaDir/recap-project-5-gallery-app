@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ListItem = styled.li`
   list-style: none;
-  border: 0.2rem solid black;
+  border: 0.2rem solid #adb6c4;
   border-radius: 1rem;
   margin-bottom: 1rem;
   padding-top: 1rem;
@@ -12,6 +12,7 @@ const ListItem = styled.li`
   flex-direction: column;
   align-items: center;
   width: 500px;
+  background-color: white;
 `;
 
 const Artist = styled.h3`
