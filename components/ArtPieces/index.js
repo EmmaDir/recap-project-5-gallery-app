@@ -14,6 +14,7 @@ export default function ArtPieces({ pieces }) {
               artist={piece.artist}
               height={piece.dimensions.height}
               width={piece.dimensions.width}
+              slug={piece.slug}
             />
           </>
         );
