@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 const RandomArt = styled.div`
-  border: 0.2rem solid orange;
+  border: 0.2rem solid #ffc49b;
   border-radius: 1rem;
   margin-bottom: 1rem;
   padding-top: 1rem;
@@ -12,6 +12,8 @@ const RandomArt = styled.div`
   align-items: center;
   width: 500px;
   margin-left: 2.45rem;
+  margin-top: 2rem;
+  background-color: white;
 `;
 
 export default function Spotlight({ image, artist, height, width }) {
