@@ -1,20 +1,21 @@
 import ArtPiecePreview from "../ArtPiecePreview";
-import { uid } from "uid";
 
-export default function ArtPieces({ pieces }) {
+export default function ArtPieces({ pieces, onToggleFavorite }) {
   return (
     <ul>
       {pieces.map((piece) => {
         return (
           <>
             <ArtPiecePreview
-              key={uid()}
+              onToggleFavorite={onToggleFavorite}
+              key={piece.slug}
               image={piece.imageSource}
               title={piece.name}
               artist={piece.artist}
               height={piece.dimensions.height}
               width={piece.dimensions.width}
               slug={piece.slug}
+              isFavorite={piece.isFavorite}
             />
           </>
         );
