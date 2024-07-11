@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
 
 const ListItem = styled.li`
   list-style: none;
@@ -11,6 +12,7 @@ const ListItem = styled.li`
   padding-left: 1rem;
   width: 500px;
   background-color: white;
+  position: relative;
 `;
 
 const StyledLink = styled(Link)`
@@ -32,9 +34,16 @@ export default function ArtPiecePreview({
   height,
   width,
   slug,
+  onToggleFavorite,
+  isFavorite,
 }) {
   return (
     <ListItem>
+      <FavoriteButton
+        onToggleFavorite={onToggleFavorite}
+        isFavorite={isFavorite}
+        slug={slug}
+      />
       <StyledLink href={`/art-pieces/${slug}`}>
         <Image
           src={image}

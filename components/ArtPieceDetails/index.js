@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
 import Image from "next/image";
 import styled from "styled-components";
+import FavoriteButton from "../FavoriteButton";
 
 const Container = styled.section`
   border: 0.2rem solid #ffc49b;
@@ -13,6 +13,7 @@ const Container = styled.section`
   width: 500px;
   margin-left: 2.45rem;
   background-color: white;
+  position: relative;
 `;
 
 const Headline = styled.h1`
@@ -35,16 +36,19 @@ const Background = styled.div`
   align-items: center;
 `;
 
-export default function ArtPieceDetails({ pieces }) {
-  const router = useRouter();
-  const { slug } = router.query;
-
-  let selectedPiece = pieces.find((piece) => piece.slug === slug);
-
+export default function ArtPieceDetails({
+  selectedPiece,
+  onToggleFavorite,
+  isFavorite,
+}) {
   return (
     <Background>
       <Headline>DETAILS</Headline>
       <Container>
+        <FavoriteButton
+          onToggleFavorite={onToggleFavorite}
+          isFavorite={isFavorite}
+        />
         <Image
           src={selectedPiece.imageSource}
           alt="Image of selected art piece"

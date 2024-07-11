@@ -1,6 +1,7 @@
 import ArtPieceDetails from "@/components/ArtPieceDetails";
 import Link from "next/link";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const StyledLink = styled(Link)`
   font-weight: bold;
@@ -15,11 +16,24 @@ const Background = styled.div`
   height: 100vw;
 `;
 
-export default function DetailsPage({ pieces }) {
+export default function DetailsPage({
+  pieces,
+  onToggleFavorite,
+  ArtPiecesInfo,
+}) {
+  const router = useRouter();
+  const { slug } = router.query;
+
+  let selectedPiece = pieces.find((piece) => piece.slug === slug);
+
   return (
     <Background>
       <StyledLink href="/art-pieces">←</StyledLink>
-      <ArtPieceDetails pieces={pieces}></ArtPieceDetails>
+      <ArtPieceDetails
+        selectedPiece={selectedPiece}
+        onToggleFavorite={() => onToggleFavorite(selectedPiece.slug)}
+        isFavorite={selectedPiece.isFavorite}
+      ></ArtPieceDetails>
     </Background>
   );
 }
