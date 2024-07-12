@@ -38,6 +38,9 @@ export default function Navigation() {
         <ListItem>
           <StyledLink href="/art-pieces">Pieces</StyledLink>
         </ListItem>
+        <ListItem>
+          <StyledLink href="/favorites">Favorites</StyledLink>
+        </ListItem>
       </StyledList>
     </Navbar>
   );

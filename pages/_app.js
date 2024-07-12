@@ -3,7 +3,7 @@ import GlobalStyle from "../styles";
 import useSWR from "swr";
 import { useState } from "react";
 import { uid } from "uid";
-import useLocalStorageState from "use-local-storage-state";
+// import useLocalStorageState from "use-local-storage-state";
 import { useEffect } from "react";
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
@@ -13,9 +13,10 @@ export default function App({ Component, pageProps }) {
   const { data, error, isLoading } = useSWR(url, fetcher);
 
   const [artPiecesInfo, setArtPiecesInfo] = useState([]);
-  const [pieces, setPieces] = useLocalStorageState("pieces", {
-    defaultValue: [],
-  });
+  // const [pieces, setPieces] = useLocalStorageState("pieces", {
+  //   defaultValue: [],
+  // });
+  const [pieces, setPieces] = useState([]);
 
   useEffect(() => {
     if (data && pieces.length === 0) {
@@ -27,6 +28,10 @@ export default function App({ Component, pageProps }) {
       setPieces(initialPieces);
     }
   }, [data, pieces.length, setPieces]);
+
+  useEffect(() => {
+    setArtPiecesInfo(pieces.filter((piece) => piece.isFavorite));
+  }, [pieces]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -46,8 +51,7 @@ export default function App({ Component, pageProps }) {
         piece.slug === slug
           ? { ...piece, isFavorite: !piece.isFavorite }
           : piece
-      ),
-      setArtPiecesInfo(pieces.filter((piece) => piece.isFavorite))
+      )
     );
   }
 
