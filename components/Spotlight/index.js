@@ -15,7 +15,7 @@ const RandomArt = styled.div`
   background-color: white;
 `;
 
-export default function Spotlight({ image, artist, height, width }) {
+export default function Spotlight({ image, width, height, artist }) {
   return (
     <RandomArt>
       <Image

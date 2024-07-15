@@ -42,7 +42,6 @@ export default function ArtPiecePreview({
       <FavoriteButton
         onToggleFavorite={onToggleFavorite}
         isFavorite={isFavorite}
-        slug={slug}
       />
       <StyledLink href={`/art-pieces/${slug}`}>
         <Image

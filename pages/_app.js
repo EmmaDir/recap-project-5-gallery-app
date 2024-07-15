@@ -4,34 +4,34 @@ import useSWR from "swr";
 import { useState } from "react";
 import { uid } from "uid";
 // import useLocalStorageState from "use-local-storage-state";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function App({ Component, pageProps }) {
   const url = "https://example-apis.vercel.app/api/art";
-  const { data, error, isLoading } = useSWR(url, fetcher);
+  const { data: pieces, error, isLoading } = useSWR(url, fetcher);
 
   const [artPiecesInfo, setArtPiecesInfo] = useState([]);
   // const [pieces, setPieces] = useLocalStorageState("pieces", {
   //   defaultValue: [],
   // });
-  const [pieces, setPieces] = useState([]);
+  // const [pieces, setPieces] = useState([]);
 
-  useEffect(() => {
-    if (data && pieces.length === 0) {
-      const initialPieces = data.map((dataItem) => ({
-        ...dataItem,
-        id: uid(),
-        isFavorite: false,
-      }));
-      setPieces(initialPieces);
-    }
-  }, [data, pieces.length, setPieces]);
+  // useEffect(() => {
+  //   if (data && pieces.length === 0) {
+  //     const initialPieces = data.map((dataItem) => ({
+  //       ...dataItem,
+  //       id: uid(),
+  //       isFavorite: false,
+  //     }));
+  //     setPieces(initialPieces);
+  //   }
+  // }, [data, pieces.length, setPieces]);
 
-  useEffect(() => {
-    setArtPiecesInfo(pieces.filter((piece) => piece.isFavorite));
-  }, [pieces]);
+  // useEffect(() => {
+  //   setArtPiecesInfo(pieces.filter((piece) => piece.isFavorite));
+  // }, [pieces]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -41,15 +41,42 @@ export default function App({ Component, pageProps }) {
     return <h1>Something went wrong!</h1>;
   }
 
-  if (!data) {
-    return <p>No data available...</p>;
-  }
+  const randomPiece = pieces[Math.floor(Math.random() * pieces.length)];
 
   function handleToggleFavorite(slug) {
-    setPieces(
+    const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
+    if (artPiece) {
+      setArtPiecesInfo(
+        artPiecesInfo.map((pieceInfo) =>
+          pieceInfo.slug === slug
+            ? { slug, isFavorite: !pieceInfo.isFavorite }
+            : pieceInfo
+        )
+      );
+    } else {
+      setArtPiecesInfo([...artPiecesInfo, { slug, isFavorite: true }]);
+    }
+  }
+
+  function handleSubmitComment(slug) {
+    const currentDate = new Date().toLocaleDateString("de-DE");
+
+    function getCurrentTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, "0");
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      return `${hours}:${minutes}`;
+    }
+    const currentTime = getCurrentTime();
+    setArtPiecesInfo(
       pieces.map((piece) =>
         piece.slug === slug
-          ? { ...piece, isFavorite: !piece.isFavorite }
+          ? {
+              ...piece,
+              comments: [
+                { comments: comments, date: currentDate, time: currentTime },
+              ],
+            }
           : piece
       )
     );
@@ -64,6 +91,8 @@ export default function App({ Component, pageProps }) {
           pieces={pieces}
           onToggleFavorite={handleToggleFavorite}
           artPiecesInfo={artPiecesInfo}
+          randomPiece={randomPiece}
+          comments={artPiecesInfo.comments}
         />
       </Layout>
     </>

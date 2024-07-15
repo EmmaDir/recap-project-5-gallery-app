@@ -19,12 +19,12 @@ const Background = styled.div`
 export default function DetailsPage({
   pieces,
   onToggleFavorite,
-  ArtPiecesInfo,
+  artPiecesInfo,
 }) {
   const router = useRouter();
   const { slug } = router.query;
 
-  let selectedPiece = pieces.find((piece) => piece.slug === slug);
+  const selectedPiece = pieces.find((piece) => piece.slug === slug);
 
   return (
     <Background>
@@ -32,7 +32,10 @@ export default function DetailsPage({
       <ArtPieceDetails
         selectedPiece={selectedPiece}
         onToggleFavorite={() => onToggleFavorite(selectedPiece.slug)}
-        isFavorite={selectedPiece.isFavorite}
+        isFavorite={
+          artPiecesInfo.find((piece) => piece.slug === selectedPiece.slug)
+            ?.isFavorite
+        }
       ></ArtPieceDetails>
     </Background>
   );

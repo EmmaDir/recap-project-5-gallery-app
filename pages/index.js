@@ -13,9 +13,7 @@ const Headline = styled.h1`
   font-size: 2.5rem;
 `;
 
-export default function SpotlightPage({ pieces }) {
-  const randomPiece = pieces[Math.floor(Math.random() * pieces.length)];
-
+export default function SpotlightPage({ randomPiece }) {
   return (
     <Conatiner>
       <Headline>SPOTLIGHT</Headline>

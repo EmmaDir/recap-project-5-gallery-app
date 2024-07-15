@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import FavoriteButton from "../FavoriteButton";
+import CommentForm from "../CommentForm";
 
 const Container = styled.section`
   border: 0.2rem solid #ffc49b;
@@ -34,6 +35,10 @@ const Background = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const Subheading = styled.h2`
+  color: red;
 `;
 
 export default function ArtPieceDetails({
@@ -70,6 +75,8 @@ export default function ArtPieceDetails({
           {selectedPiece.genre}
         </Detail>
       </Container>
+      <Subheading>Comments:</Subheading>
+      <CommentForm />
     </Background>
   );
 }

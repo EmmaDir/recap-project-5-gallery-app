@@ -11,13 +11,20 @@ const Headline = styled.h1`
   font-size: 2.5rem;
 `;
 
-export default function ArtPiecesPage({ pieces, onToggleFavorite }) {
+export default function ArtPiecesPage({
+  pieces,
+  onToggleFavorite,
+  artPiecesInfo,
+  onArtPiecesInfo,
+}) {
   return (
     <Container>
       <Headline>ART GALLERY</Headline>
       <ArtPieces
         pieces={pieces}
         onToggleFavorite={onToggleFavorite}
+        artPiecesInfo={artPiecesInfo}
+        onArtPiecesInfo={onArtPiecesInfo}
       ></ArtPieces>
     </Container>
   );
